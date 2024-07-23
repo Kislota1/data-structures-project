@@ -18,6 +18,9 @@ class Stack:
         """Конструктор класса Stack"""
         self.top = None
 
+    def __str__(self):
+        return f'{self.top}'
+
     def push(self, data):
         """
         Метод для добавления элемента на вершину стека
@@ -37,3 +40,4 @@ class Stack:
         data = self.top.data
         self.top = self.top.next_node
         return data
+
