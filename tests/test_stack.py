@@ -26,5 +26,10 @@ def test_stack_push():
     assert stack.top.next_node.data == 'data1'
     assert stack.top.next_node.next_node is None
 
+def test_stack_str():
+    stack = Stack()
+
+    assert str(Stack()) == ""
+
 
 

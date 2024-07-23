@@ -25,6 +25,7 @@ class Queue:
         :param data: данные, которые будут добавлены в очередь
         """
         new_node = Node(data, self.top)
+        self.top = new_node
 
     def dequeue(self):
         """
@@ -32,10 +33,12 @@ class Queue:
 
         :return: данные удаленного элемента
         """
+        if self.top is None:
+            raise IndexError("dequeue from empty queue")
         data = self.top.data
         self.top = self.top.next_node
         return data
 
     def __str__(self):
         """Магический метод для строкового представления объекта"""
-        return f''
+        return
