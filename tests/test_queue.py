@@ -5,32 +5,38 @@ import unittest
 class TestQueue(unittest.TestCase):
     def test_enqueue(self):
         queue = Queue()
-        queue.enqueue(1)
-        self.assertEqual(queue.top.data, 1)
-        queue.enqueue(2)
-        self.assertEqual(queue.top.data, 2)
-        queue.enqueue(3)
-        self.assertEqual(queue.top.data, 3)
+
+        # Проверка начального состояния очереди
+        self.assertEqual(str(queue), "")
+
+        # Добавление первого элемента
+        queue.enqueue('data1')
+        self.assertEqual(str(queue), "data1")
+
+        # Добавление второго элемента
+        queue.enqueue('data2')
+        self.assertEqual(str(queue), "data1-data2")
+
+        # Добавление третьего элемента
+        queue.enqueue('data3')
+        self.assertEqual(str(queue), "data1-data2-data3")
 
     def test_dequeue(self):
         queue = Queue()
-        queue.enqueue(1)
-        queue.enqueue(2)
-        queue.enqueue(3)
-        self.assertEqual(queue.dequeue(), 3)
-        self.assertEqual(queue.dequeue(), 2)
-        self.assertEqual(queue.dequeue(), 1)
 
-    def test_dequeue_empty(self):
-        queue = Queue()
-        with self.assertRaises(IndexError):
-            queue.dequeue()
+        # Проверка удаления из пустой очереди
+        self.assertIsNone(queue.dequeue())
 
-    def test_enqueue_dequeue(self):
-        queue = Queue()
-        queue.enqueue(1)
-        self.assertEqual(queue.dequeue(), 1)
-        queue.enqueue(2)
-        queue.enqueue(3)
-        self.assertEqual(queue.dequeue(), 3)
-        self.assertEqual(queue.dequeue(), 2)
+        # Добавление элементов
+        queue.enqueue('data1')
+        queue.enqueue('data2')
+        queue.enqueue('data3')
+
+        # Удаление элементов и проверка их значений
+        self.assertEqual(queue.dequeue(), 'data1')
+        self.assertEqual(queue.dequeue(), 'data2')
+        self.assertEqual(queue.dequeue(), 'data3')
+
+        # Проверка состояния очереди после удаления всех элементов
+        self.assertIsNone(queue.dequeue())
+        self.assertEqual(str(queue), "")
